@@ -1,17 +1,29 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <goalsHeader />
+    <goals 
+      :goalItems="goalItems"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import goalsHeader from './components/goalsHeader.vue'
+import goals from './components/goals.vue'
 
-export default {
+export default{
   name: 'app',
   components: {
-    HelloWorld
+    goalsHeader,
+    goals
+  },
+  data() {
+    return{
+      goalItems: [
+        {name:'goal1'}, 
+        {name:'goal2'}
+      ]
+    }
   }
 }
 </script>
