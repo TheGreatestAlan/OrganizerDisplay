@@ -1,41 +1,84 @@
 <template>
   <div id="app">
-  <p>{{ hello }}</p>
-  <!--<button @click="hello++">THIS IS A BUTTON</button>
-    <goalsHeader />
-    <goals 
-      :goalItems="goalItems"
-    />-->
+    <input v-model="itemName" placeholder="item name" @keyup.enter="searchInventory">
+    <button @click="searchInventory">SEARCH INVENTORY</button>
+    <RenderList :items='itemSearchList' :showList='showItemSearchList' ></RenderList>
+    <p></p>
+    <input v-model="containerId" placeholder="container ID" @keyup.enter="searchContainerLocation">
+    <button @click="searchContainerLocation">CONTAINER LOCATION</button>
+    <RenderList :items='containerSearchList' :showList='showContainerSearchList' ></RenderList>
+    <p></p>
+    <button @click="getInventory">SHOW INVENTORY</button>
+    <RenderList :items='objectList' :showList='showList' ></RenderList>
   </div>
 </template>
 
 <script>
 //import goalsHeader from './components/goalsHeader.vue'
 //import goals from './components/goals.vue'
+import RenderList from './components/RenderList.vue'
 import EventService from '@/services/EventService.js'
 
 export default{
   name: 'app',
   components: {
+    RenderList
     //goalsHeader,
     //goals
   },
-  created() {
-    EventService.getEvents()
-      .then(response => {
-        this.hello = response.data
-      })
-      .catch(error => {
-        console.log("uh ohs:" + error)
-      })
-  },
   data() {
     return{
+      objectList: null,
+      showList: false,
+      showItemSearchList: false,
+      itemSearchList: null,
+      containerSearchList: null,
+      showContainerSearchList: false,
+      itemName: null,
+      containerId: null
       /*goalItems: [
         {name:'goal1'}, 
         {name:'goal2'}
       ],*/
-      hello:3
+    }
+  },
+
+  methods: {
+    searchInventory() {
+      EventService.getItemLocation(this.itemName)
+      .then(response => {
+        this.itemSearchList = response.data
+      })
+      .catch(error => {
+        console.log("uh ohs:" + error)
+      })
+      this.showItemSearchList = true
+      this.showList = false
+      this.showContainerList = false
+    },
+    searchContainerLocation() {
+      EventService.getContainerLocation(this.containerId)
+      .then(response => {
+        this.containerSearchList = response.data
+      })
+      .catch(error => {
+        console.log("uh ohs:" + error)
+      })
+      this.showContainerSearchList = true
+      this.showItemList = false
+      this.showList = false
+    },
+    getInventory(){
+      EventService.getEvents()
+      .then(response => {
+        this.objectList = response.data
+      })
+      .catch(error => {
+        console.log("uh ohs:" + error)
+      })
+      this.showItemSearchList = false
+      this.showContainerSearchList = false
+      this.showList = true
     }
   }
 }
