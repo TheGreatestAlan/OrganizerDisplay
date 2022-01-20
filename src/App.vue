@@ -17,7 +17,7 @@
 //import goalsHeader from './components/goalsHeader.vue'
 //import goals from './components/goals.vue'
 import RenderList from './components/RenderList.vue'
-import EventService from '@/services/EventService.js'
+import EventService from '@/services/OrganizerService.js'
 
 export default{
   name: 'app',
@@ -54,7 +54,7 @@ export default{
       })
       this.showItemSearchList = true
       this.showList = false
-      this.showContainerList = false
+      this.showContainerSearchList = false
     },
     searchContainerLocation() {
       EventService.getContainerLocation(this.containerId)
@@ -65,7 +65,7 @@ export default{
         console.log("uh ohs:" + error)
       })
       this.showContainerSearchList = true
-      this.showItemList = false
+      this.showItemSearchList = false
       this.showList = false
     },
     getInventory(){
