@@ -1,7 +1,11 @@
 @echo off
 
+cd %~dp0
+
 REM Call the build script
 call build.bat
+
+cd %~dp0
 
 REM Call the push script
 call push_to_registry.bat
