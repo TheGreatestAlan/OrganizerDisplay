@@ -1,13 +1,16 @@
 import axios from 'axios'
 
+const baseURL = 'http://localhost:8081';
+
 const apiClient = axios.create({
-	baseURL: 'http://localhost:8081',
+	baseURL: baseURL,
 	withCredentials: false,
 	headers: {
 		'Accept': 'application/json',
 		'Content-Type': 'application/json',
 	}
-})
+});
+
 
 export default {
 	getEvents() {
