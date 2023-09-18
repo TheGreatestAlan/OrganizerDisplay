@@ -4,7 +4,7 @@ REM Set the image name and tag you want to push
 SET IMAGE_NAME=web:latest
 
 REM Check if LOCAL_REGISTRY environment variable is set, if not, default to localhost:5000
-IF "%LOCAL_REGISTRY%"=="" SET LOCAL_REGISTRY=localhost:5000
+REM IF "%LOCAL_REGISTRY%"=="" SET LOCAL_REGISTRY=192.168.1.26:5000
 
 REM Tag the image for the local registry
 docker tag %IMAGE_NAME% %LOCAL_REGISTRY%/%IMAGE_NAME%
