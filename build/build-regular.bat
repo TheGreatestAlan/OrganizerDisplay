@@ -6,4 +6,4 @@ REM Go one level above the script's directory
 cd ..
 REM
 REM Run the docker build command
-docker build -t organizer-web .
+docker build -t web .
